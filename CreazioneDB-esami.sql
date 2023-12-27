@@ -45,3 +45,5 @@ CREATE TABLE `esame` (
   FOREIGN KEY (`studente_matricola`) REFERENCES `studente`(`matricola`),
   FOREIGN KEY (`corso_sigla`) REFERENCES `corso`(`sigla`)
 );
+
+--  piccolo esempio di come posso cambiare cose per una PULL da un branch mio
