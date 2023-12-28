@@ -5,7 +5,7 @@ CREATE DATABASE carte;
 CREATE TABLE clienti (
     'cf' VARCHAR(16) NOT NULL,
     'nome' VARCHAR(20) NOT NULL,
-    'fascia_reddito' ENUM('R1', 'R2', 'R3') NOT NULL,
+    'fascia_reddito' FLOAT NOT NULL,
     'sesso' ENUM('M', 'F') NOT NULL,
     'data_nascita' DATE NOT NULL,
     'indirizzo' VARCHAR(30) NOT NULL,
