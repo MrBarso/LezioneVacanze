@@ -2,7 +2,7 @@
 CREATE DATABASE magistrali;
 
 --creazione tabella docenti
-CREATE TABLE `docente` (
+CREATE TABLE docente (
   `id` TINYINT NOT NULL AUTO_INCREMENT,
   `nome` VARCHAR(20) NOT NULL,
   `cognome` VARCHAR(20) NOT NULL,
@@ -11,7 +11,7 @@ CREATE TABLE `docente` (
 );
 
 --creazione tabella corsi (ha i docenti come fk)
-CREATE TABLE `corso` (
+CREATE TABLE corso (
   `sigla` VARCHAR(10) NOT NULL,
   `nome_corso` VARCHAR(20) NOT NULL,
   'obbligatorio' BOOLEAN NOT NULL,
@@ -23,7 +23,7 @@ CREATE TABLE `corso` (
 );
 
 --creazione tabella studenti (ha i corsi come fk)'
-CREATE TABLE `studente` (
+CREATE TABLE studente(
   `matricola` VARCHAR(10) NOT NULL,
   `sesso` ENUM('M', 'F') NOT NULL,
   `nome_universita` VARCHAR(20) NOT NULL,
@@ -34,7 +34,7 @@ CREATE TABLE `studente` (
 );
 
 --creazione tabella esami (ha corsi e studenti come fk)'
-CREATE TABLE `esame` (
+CREATE TABLE esame (
   `id_esame` INT NOT NULL AUTO_INCREMENT,
   `voto` INT CHECK (`voto` BETWEEN 1 AND 31),
   `studente_matricola` VARCHAR(10) NOT NULL,
