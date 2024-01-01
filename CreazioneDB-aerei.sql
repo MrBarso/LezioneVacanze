@@ -23,7 +23,7 @@ CREATE TABLE voli (
     'compagnia' VARCHAR(20) NOT NULL,
     'orario_partenza' HOUR NOT NULL,
     'orario_arrivo' HOUR NOT NULL,
-    'durata' AS orario_arrivo - orario_partenza, -- non so se funzinoa
+    'durata' FLOAT NOT NULL
     'partenza' VARCHAR(20) NOT NULL,
     'destinazione' VARCHAR(20) NOT NULL,
     'scalo' VARCHAR(20),
@@ -35,5 +35,5 @@ CREATE TABLE voli (
     PRIMARY KEY ('numero'),
     FOREIGN KEY (compagnia) REFERENCES compagnie.nome
     FOREIGN KEY (pilota) REFERENCES piloti.codice
-    FOREIGN KEY (pilota) REFERENCES piloti.codice
+    FOREIGN KEY (copilota) REFERENCES piloti.codice
 );
