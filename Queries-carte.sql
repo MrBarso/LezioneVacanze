@@ -2,25 +2,23 @@
 
 --totale speso dai clienti per categoria di acqusto, trimestre e regione
 SELECT 
-    esercenti.categoria, 
+    acquisti.categoria, 
     MONTH(acquisti.data) AS mese_acquisto, 
-    esercenti.citta,
+    clienti.indirizzo, -- non so come si calcola la regione dato un indirizzo
     SUM(acquisti.importo) AS totale_speso
 FROM acquisti 
-JOIN clienti ON acquisti.id
+JOIN clienti ON acquisti.id_acquisto
 GROUP BY 
     acquisti.categoria, 
-    acquisti.data,
-    esercenti.citta;
+    acquisti.data, -- non so come si groupa per trimestre avendo il mese
+    clienti.indirizzo
 
-
--- numero medio di acquisti degli articoli da viaggio dei clienti con fascia di reddito tra 50.000 e 60.000 per conto e citta
-
+-- 2)
 SELECT 
     YEAR(acquisti.data) AS anno_acquisto, 
-    estratti_conto.id, 
-    esercenti.citta, 
-    AVG(IF(acquisti.categoria = 'viaggi', 1, NULL)) AS acquisti_articoliviaggio_media
+    estratto_conto.id_estratto_conto, 
+    clienti.indirizzo, 
+    AVG(IF(acquisti.categoria = 'viaggi', 1, NULL)) AS acquisti_viaggi_media
 FROM acquisti
 JOIN estratto_conto ON acquisti.id_acquisto
 JOIN clienti ON acquisti.id_acquisto
@@ -29,16 +27,41 @@ WHERE
     AND clienti.fascia_reddito >= 50000
     AND clienti.fascia_reddito < 60000
 GROUP BY 
-    estratti_conto.id, 
+    estratto_conto.id_estratto_conto, 
     clienti.indirizzo
 
--- totale speso in viaggi per mese e provincia
+-- 3)
 SELECT
-    SUM(IF(acquisti.categoria = 'viaggi', 1, NULL)) AS totale,
+    clienti.indirizzo, 
     MONTH(acquisti.data) AS mese_acquisto, 
-    esercenti.citta
+    SUM(acquisti.importo) AS totale_speso
+
 FROM acquisti
-JOIN clienti ON acquisti.id
+JOIN clienti ON acquisti.id_acquisto
 GROUP BY 
     mese_acquisto, 
     clienti.indirizzo
+
+-- 4)
+SELECT
+    clienti.fascia_reddito, 
+    promozioni.nome_prodotto, 
+    COUNT(risposte_promozioni.risposta = 'si') AS adesioni
+FROM risposte_promozioni
+JOIN clienti ON risposte_promozioni.codiceFiscale = codice_fiscale
+JOIN promozioni ON risposte_promozioni.codicePromozione = codice_promozione
+GROUP BY
+    promozioni.nome_prodotto, 
+    clienti.fascia_reddito
+
+-- 5)
+SELECT
+    COUNT(risposte_promozioni.risposta = 'si') AS adesioni
+FROM
+    risposte_promozioni
+JOIN clienti ON risposte_promozioni.codiceFiscale = codice_fiscale
+JOIN promozioni ON risposte_promozioni.codicePromozione = codice_promozione
+WHERE 
+    promozioni.nome_prodotto = 'orologio'
+    AND clienti.fascia_reddito >= 50000
+    AND clienti.fascia_reddito < 60000

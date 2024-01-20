@@ -1,39 +1,32 @@
--- creazione database
-CREATE DATABASE aerei;
+/* creazione di un database che gestisce compagnie aeree, piloti e voli */
 
---creazione tabella compagnie
-CREATE TABLE compagnie(
-    'nome' VARCHAR(16) NOT NULL,
-    'anno_fondazione' YEAR NOT NULL,
+CREATE DATABASE `aerei`;
 
-    PRIMARY KEY ('nome')
+CREATE TABLE `compagnie` (
+  `nome` VARCHAR(20) NOT NULL PRIMARY KEY ,
+  `anno_fondazione` YEAR NOT NULL
 );
 
---creazione tabella piloti
-CREATE TABLE piloti(
-    'codice' INT NOT NULL AUTO_INCREMENT, 
-    'nome' VARCHAR(16) NOT NULL, 
- 
-    PRIMARY KEY ('codice')
+CREATE TABLE 'piloti'(
+    'codice' INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    'nome' VARCHAR(20) NOT NULL,
+    'cognome' VARCHAR(20) NOT NULL,
+    'eta' INT NOT NULL
 );
 
---creazione tabella clienti
-CREATE TABLE voli (
-    'numero' VARCHAR(5) NOT NULL,
+CREATE TABLE 'voli'(
+    'numero' VARCHAR(5) NOT NULL PRIMARY KEY,
     'compagnia' VARCHAR(20) NOT NULL,
-    'orario_partenza' HOUR NOT NULL,
-    'orario_arrivo' HOUR NOT NULL,
-    'durata' FLOAT NOT NULL
-    'partenza' VARCHAR(20) NOT NULL,
-    'destinazione' VARCHAR(20) NOT NULL,
-    'scalo' VARCHAR(20),
-    'soppresso' BOOLEAN NOT NULL,
     'pilota' INT NOT NULL,
     'copilota' INT NOT NULL,
-
-
-    PRIMARY KEY ('numero'),
-    FOREIGN KEY (compagnia) REFERENCES compagnie.nome
-    FOREIGN KEY (pilota) REFERENCES piloti.codice
-    FOREIGN KEY (copilota) REFERENCES piloti.codice
+    'orario_partenza' DATETIME NOT NULL,
+    'orario_arrivo' DATETIME NOT NULL,
+    'durata' FLOAT NOT NULL,
+    'destinazione' VARCHAR(20) NOT NULL,
+    'scalo' VARCHAR(20) NOT NULL,
+    'soppresso' BOOLEAN NOT NULL,
+    
+    FOREIGN KEY (compagnia) REFERENCES compagnie(nome),
+    FOREIGN KEY (pilota) REFERENCES piloti(codice),
+    FOREIGN KEY (copilota) REFERENCES piloti(codice)
 );
