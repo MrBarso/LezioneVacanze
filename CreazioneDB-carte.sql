@@ -61,7 +61,9 @@ CREATE TABLE acquisti(
     'importo' FLOAT NOT NULL, 
     'esercente' INT NOT NULL, 
     'estratto_conto' VARCHAR(15) NOT NULL, 
+    'cliente' VARCHAR(16) NOT NULL, 
     
     FOREIGN KEY (esercente) REFERENCES esercenti(id),
-    FOREIGN KEY (estratto_conto) REFERENCES estratti_conto(numero)
+    FOREIGN KEY (estratto_conto) REFERENCES estratti_conto(numero),
+    FOREIGN KEY (cliente) REFERENCES clienti(cf)
 );
