@@ -41,7 +41,7 @@ WHERE
     AND clienti.fascia_reddito < "ESEMPIO"
 
 
--- 5
+-- numero dei clienti con fascia di reddito tra 50000 e 60000 che hanno accettato un'offerta di orologi 
 SELECT
     COUNT(offerte.risposta = 'si') AS adesioni
 FROM
