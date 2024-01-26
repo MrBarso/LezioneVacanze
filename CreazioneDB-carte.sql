@@ -56,7 +56,7 @@ CREATE TABLE esercenti(
 
 --creazione tabella acquisti (ha come FK gli esercenti e gli estratti conto)
 CREATE TABLE acquisti(
-    id' INT NOT NULL PRIMARY KEY AUTO_INCREMENT, 
+    id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, 
     data DATE NOT NULL, 
     importo FLOAT NOT NULL, 
     esercente INT NOT NULL, 
