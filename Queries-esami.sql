@@ -4,20 +4,21 @@
 
 SELECT COUNT(CASE WHEN esame.voto>17) AS esami_superati
 FROM esame 
-JOIN corso ON esame.corso_sigla = corso.sigla
+JOIN corso ON esame.corso_sigla
 WHERE corso.sigla = 'ESEMPIO'; -- cambiare nome corso o cambiare condizione per gli altri parametri
 
 SELECT COUNT(DISTINCT esame.studente_matricola) AS esami_sostenuti
 FROM esame 
-JOIN corso ON esame.corso_sigla = corso.sigla
+JOIN corso ON esame.corso_sigla
 WHERE corso.sigla = 'ESEMPIO'; -- cambiare nome corso
 
 
 -- numero di esami non supearti per nome del corso, anno accademico, sessione e università di laurea
 
-SELECT COUNT(CASE WHEN esame.voto<18) AS esami_non_superati
+SELECT 
+	COUNT(CASE WHEN esame.voto<18) AS esami_non_superati
 FROM esame 
-JOIN corso ON esame.corso_sigla = corso.sigla
+JOIN corso ON esame.corso_sigla
 WHERE corso.sigla = 'ESEMPIO'; -- cambiare nome corso o cambiare condizione per gli altri parametri
 
 
@@ -28,7 +29,7 @@ SELECT
     AVG(IF(esame.voto < 18, esame.voto, NULL)) AS voto_medio_superati, 
     SUM(corso.crediti) AS cfu_totali
 FROM esame 
-JOIN corso ON esame.corso_sigla = corso.sigla
+JOIN corso ON esame.corso_sigla
 WHERE esame.voto >= 18 AND corso.sigla = 'ESEMPIO'; -- cambiare nome corso o cambiare condizione per gli altri parametri
 
 
@@ -39,5 +40,5 @@ SELECT
     COUNT(DISTINCT esame.studente_matricola) AS numero_studenti_sostenuto,
     SUM(CASE WHEN esame.voto > 17) / COUNT(esame.studente_matricola) * 100 AS percentuale_superati
 FROM esame 
-JOIN studente ON esame.studente_matricola = studente.matricola
+JOIN studente ON esame.studente_matricola
 WHERE esame.nome_corso = 'ESEMPIO'; -- cambiare nome corso o cambiare condizione per gli altri parametri

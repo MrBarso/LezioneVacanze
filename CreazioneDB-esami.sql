@@ -6,7 +6,7 @@ CREATE TABLE docente (
   id TINYINT NOT NULL PRIMARY KEY AUTO_INCREMENT,
   nome VARCHAR(20) NOT NULL,
   cognome VARCHAR(20) NOT NULL,
-  dipartimento VARCHAR(20) NOT NULL,
+  dipartimento VARCHAR(20) NOT NULL
 );
 
 -- creazione tabella corsi (ha i docenti come fk)
@@ -15,7 +15,7 @@ CREATE TABLE corso (
   nome_corso VARCHAR(20) NOT NULL,
   obbligatorio BOOLEAN NOT NULL,
   docente TINYINT NOT NULL,
-  crediti ENUM(3, 6, 9, 12, 15) NOT NULL,
+  crediti ENUM('3', '6', '9', '12', '15') NOT NULL,
   semestre ENUM('invernale','autunnale') NOT NULL,
 
   FOREIGN KEY (docente) REFERENCES docente(id)
