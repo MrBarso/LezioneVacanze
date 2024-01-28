@@ -31,26 +31,30 @@ WHERE esercenti.categoria = 'ESEMPIO'; -- cambiare esempio o parametro
 
 -- Numero di adesioni e promozioni per prodotto e per fascia di reddito dei clienti
 
-/*SELECT
+SELECT
     promozioni.nome_prodotto, 
     clienti.fascia_reddito, 
-    COUNT(offerte.risposta = 'si') AS adesioni
-    COUNT(offerte.risposta) AS promozioni
-FROM offerte, promozioni, clienti
+    COUNT(offerte.risposta) AS adesioni
+FROM offerte
 JOIN clienti ON offerte.cf
+JOIN promozioni ON offerte.codice 
 WHERE 
     promozioni.nome_prodotto = 'ESEMPIO'
+    AND offerte.risposta = 'si'
     AND clienti.fascia_reddito >= "ESEMPIO"
-    AND clienti.fascia_reddito < "ESEMPIO";*/
+    AND clienti.fascia_reddito < "ESEMPIO";
+    promozioni.nome_prodotto;
 
 
 -- numero dei clienti con fascia di reddito tra 50000 e 60000 che hanno accettato un'offerta di orologi 
-/*SELECT
-    COUNT(offerte.risposta = 'si') AS adesioni
+SELECT
+    COUNT(offerte.risposta) AS adesioni
 FROM
     offerte
-JOIN clienti ON offerte.cf AND promozioni ON offerte.codice
+JOIN clienti ON offerte.cf 
+JOIN promozioni ON offerte.codice
 WHERE 
-    promozioni.nome_prodotto = "orologio"
+    promozioni.nome_prodotto = 'orologio'
+    AND offerte.risposta = 'si'
     AND clienti.fascia_reddito >= 50000
-    AND clienti.fascia_reddito < 60000;*/
+    AND clienti.fascia_reddito < 60000;
