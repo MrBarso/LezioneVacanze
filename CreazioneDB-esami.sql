@@ -1,7 +1,7 @@
 -- creazione database
 CREATE DATABASE magistrali;
 
---creazione tabella docenti
+-- creazione tabella docenti
 CREATE TABLE docente (
   id TINYINT NOT NULL PRIMARY KEY AUTO_INCREMENT,
   nome VARCHAR(20) NOT NULL,
@@ -9,7 +9,7 @@ CREATE TABLE docente (
   dipartimento VARCHAR(20) NOT NULL,
 );
 
---creazione tabella corsi (ha i docenti come fk)
+-- creazione tabella corsi (ha i docenti come fk)
 CREATE TABLE corso (
   sigla VARCHAR(10) NOT NULL PRIMARY KEY,
   nome_corso VARCHAR(20) NOT NULL,
@@ -21,7 +21,7 @@ CREATE TABLE corso (
   FOREIGN KEY (docente) REFERENCES docente(id)
 );
 
---creazione tabella studenti (ha i corsi come fk)'
+-- creazione tabella studenti (ha i corsi come fk)'
 CREATE TABLE studente(
   matricola VARCHAR(10) NOT NULL PRIMARY KEY,
   sesso ENUM('M', 'F') NOT NULL,
@@ -32,7 +32,7 @@ CREATE TABLE studente(
   FOREIGN KEY (corso) REFERENCES corso(sigla)
 );
 
---creazione tabella esami (ha corsi e studenti come fk)'
+-- creazione tabella esami (ha corsi e studenti come fk)'
 CREATE TABLE esame (
   id_esame INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
   voto INT CHECK (`voto` BETWEEN 1 AND 31),

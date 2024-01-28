@@ -1,7 +1,7 @@
 -- creazione database
 CREATE DATABASE carte;
 
---creazione tabella clienti
+-- creazione tabella clienti
 CREATE TABLE clienti (
     cf VARCHAR(16) NOT NULL PRIMARY KEY,
     nome VARCHAR(20) NOT NULL,
@@ -15,7 +15,7 @@ CREATE TABLE clienti (
 );
 
 
---creazione tabella promozioni
+-- creazione tabella promozioni
 CREATE TABLE promozioni(
     codice VARCHAR(16) NOT NULL PRIMARY KEY,
     nome_prodotto VARCHAR(20) NOT NULL,
@@ -24,7 +24,7 @@ CREATE TABLE promozioni(
     data_fine DATE NOT NULL
 );
 
---creazione tabella offerta (entità relazionale tra promozioni e clienti, ha come FK le PK di clienti e promozioni)
+-- creazione tabella offerta (entità relazionale tra promozioni e clienti, ha come FK le PK di clienti e promozioni)
 CREATE TABLE offerte(
     cf VARCHAR(16) NOT NULL, 
     codice VARCHAR(16) NOT NULL, 
@@ -36,17 +36,17 @@ CREATE TABLE offerte(
 );
 
 
---creazione tabella estratti conto (ha come FK la PK dei clienti)
+-- creazione tabella estratti conto (ha come FK la PK dei clienti)
 CREATE TABLE estratti_conto(
     numero INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    data DATE NOT NULL,
+    dat DATE NOT NULL,
     totale_spesa FLOAT NOT NULL,
     cf VARCHAR(16) NOT NULL,
     
     FOREIGN KEY (cf) REFERENCES clienti(cf)
 );
 
---creazione tabella esercenti
+-- creazione tabella esercenti
 CREATE TABLE esercenti(
     id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     nome VARCHAR(20) NOT NULL,
@@ -54,10 +54,10 @@ CREATE TABLE esercenti(
     citta VARCHAR(30) NOT NULL
 );
 
---creazione tabella acquisti (ha come FK gli esercenti e gli estratti conto)
+-- creazione tabella acquisti (ha come FK gli esercenti e gli estratti conto)
 CREATE TABLE acquisti(
     id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, 
-    data DATE NOT NULL, 
+    dat DATE NOT NULL, 
     importo FLOAT NOT NULL, 
     esercente INT NOT NULL, 
     estratto_conto INT NOT NULL, 

@@ -22,7 +22,7 @@ WHERE corso.sigla = 'ESEMPIO'; -- cambiare nome corso o cambiare condizione per 
 
 
 
---di un certo corso di laurea e anno di iscrizione, voto medio degli esami supearti e totale CFU acquisiti per sesso dello studente
+-- di un certo corso di laurea e anno di iscrizione, voto medio degli esami supearti e totale CFU acquisiti per sesso dello studente
 
 SELECT 
     AVG(IF(esame.voto < 18, esame.voto, NULL)) AS voto_medio_superati, 
