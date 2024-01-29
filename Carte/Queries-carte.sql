@@ -12,10 +12,10 @@ SELECT
     AVG(IF(esercenti.categoria = 'viaggi', 1, NULL)) AS acquisti_viaggi_media
 FROM esercenti
 JOIN acquisti ON esercenti.id 
-AND estratto_conto ON esercenti.id 
-AND clienti ON acquisti.cliente
+JOIN estratti_conto ON esercenti.id 
+JOIN clienti ON acquisti.cliente
 WHERE 
-    YEAR(acquisti.data) = 'ESEMPIO' -- cambiare anno o parametro
+    YEAR(acquisti.dat) = 'ESEMPIO' -- cambiare anno o parametro
     AND clienti.fascia_reddito >= 50000
     AND clienti.fascia_reddito < 60000;
 
